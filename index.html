@@ -1,74 +1,182 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio con destellos</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tu Nombre — Desarrollador Web</title>
+  <meta name="description" content="Portfolio de Tu Nombre — desarrollador front-end / fullstack. Proyectos en React, Node, CSS, etc." />
+  <link rel="icon" href="favicon.ico" />
   <style>
-    body {
-      margin: 0;
-      height: 200vh;
-      background: url("/public/PortfolioBackground.png") no-repeat center center fixed;
-      background-size: cover;
-      overflow-x: hidden;
-      font-family: sans-serif;
-      color: white;
+    /* Reset mínimo */
+    :root{
+      --fg:#ffffff;
+      --muted:rgba(255,255,255,0.85);
+      --maxw:1100px;
+      --accent1:#7b61ff;
+      --accent2:#00d4ff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--fg);
+      background:linear-gradient(120deg,var(--accent1),var(--accent2));
+      overflow-x:hidden;
     }
 
-    .content {
-      position: relative;
-      z-index: 1;
-      padding: 50px;
+    /* Fondo animado con pseudo-elemento y blur */
+    .bg {
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06), transparent 10%),
+                  radial-gradient(circle at 90% 80%, rgba(0,0,0,0.06), transparent 12%);
+      animation: hue 12s linear infinite;
+      filter: blur(40px) saturate(120%);
+      transform: scale(1.05);
+    }
+    @keyframes hue{
+      0%{filter: hue-rotate(0deg) blur(40px) }
+      50%{filter: hue-rotate(60deg) blur(50px) }
+      100%{filter: hue-rotate(0deg) blur(40px) }
     }
 
-    /* Destellos sobre las ondas */
-    .light-dot {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: rgba(0,255,255,0.8); /* azul brillante para verse sobre negro */
-      border-radius: 50%;
-      top: 50%;
-      left: 0;
-      transform: translate(0,0);
-      animation: moveDot 5s linear infinite;
-      pointer-events: none;
-      z-index: 0;
+    /* Contenedor */
+    .wrap{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:48px 20px;
     }
 
-    /* Diferentes delays para varios puntos */
-    .light-dot:nth-child(1) { animation-delay: 0s; }
-    .light-dot:nth-child(2) { animation-delay: 1s; }
-    .light-dot:nth-child(3) { animation-delay: 2s; }
-    .light-dot:nth-child(4) { animation-delay: 3s; }
-    .light-dot:nth-child(5) { animation-delay: 4s; }
+    header{display:flex;justify-content:space-between;align-items:center}
+    .logo{font-weight:700;letter-spacing:0.3px}
+    nav a{color:var(--muted);margin-left:18px;text-decoration:none;font-size:0.95rem}
 
-    /* Trayectoria aproximada de las ondas */
-    @keyframes moveDot {
-      0%   { transform: translate(0, 0); }
-      20%  { transform: translate(120px, -40px); }
-      40%  { transform: translate(240px, 20px); }
-      60%  { transform: translate(360px, -30px); }
-      80%  { transform: translate(480px, 10px); }
-      100% { transform: translate(600px, 0); }
+    .hero{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:20px;
+      padding:80px 0 40px;
     }
+    .hero h1{font-size:clamp(2rem,5vw,3rem);margin:0}
+    .hero p{color:var(--muted);max-width:70ch}
+
+    .buttons a{
+      display:inline-block;
+      margin-top:14px;
+      padding:10px 16px;
+      background:rgba(255,255,255,0.06);
+      color:var(--fg);
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Grid de proyectos */
+    .projects{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
+      margin-top:28px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.03));
+      border-radius:12px;
+      padding:16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      transition:transform .2s ease, box-shadow .2s;
+    }
+    .card:hover{transform:translateY(-6px); box-shadow:0 12px 30px rgba(0,0,0,0.35)}
+    .card h3{margin:0 0 8px 0}
+    .card p{color:var(--muted);font-size:0.95rem}
+
+    footer{margin:64px 0 24px;color:var(--muted);font-size:0.9rem}
+
+    /* prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce){
+      .bg{animation:none}
+      .card, .hero h1{transition:none}
+    }
+
+    /* responsive tweaks */
+    @media(min-width:900px){
+      .hero{grid-template-columns: 1fr 360px; align-items:center}
+    }
+
   </style>
 </head>
 <body>
+  <div class="bg" aria-hidden="true"></div>
 
-  <!-- Destellos -->
-  <div class="light-dot"></div>
-  <div class="light-dot"></div>
-  <div class="light-dot"></div>
-  <div class="light-dot"></div>
-  <div class="light-dot"></div>
+  <div class="wrap">
+    <header>
+      <div class="logo">TuNombre</div>
+      <nav>
+        <a href="#projects">Proyectos</a>
+        <a href="#about">Sobre mí</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </header>
 
-  <div class="content">
-    <h1>Bienvenido a mi portfolio</h1>
-    <p>Los destellos recorren las ondas mientras scrolleas.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at nisi ac neque finibus bibendum.</p>
-    <p>Scroll hacia abajo para ver más contenido...</p>
+    <main>
+      <section class="hero" id="home">
+        <div>
+          <h1>Hola, soy <strong>Tu Nombre</strong><br/>Desarrollador web</h1>
+          <p>Construyo interfaces limpias y experiencias rápidas — front-end moderno con React y buenas prácticas de accesibilidad.</p>
+          <div class="buttons">
+            <a href="#projects">Ver proyectos</a>
+            <a href="#contact">Contactar</a>
+          </div>
+        </div>
+
+        <aside aria-hidden="false">
+          <!-- tarjeta rápida con skills -->
+          <div style="background:rgba(255,255,255,0.03);padding:18px;border-radius:12px;">
+            <h4 style="margin:0 0 8px">Stack</h4>
+            <p style="margin:0;color:var(--muted)">HTML · CSS · JavaScript · React · Node · Express · PostgreSQL</p>
+          </div>
+        </aside>
+      </section>
+
+      <section id="projects">
+        <h2>Proyectos</h2>
+        <div class="projects">
+          <article class="card">
+            <h3>Proyecto 1</h3>
+            <p>Breve descripción. Tech: React · Vite · Tailwind</p>
+            <p><a href="#" style="color:var(--muted)">Ver repo →</a></p>
+          </article>
+
+          <article class="card">
+            <h3>Proyecto 2</h3>
+            <p>Breve descripción. Tech: Node · Express · PostgreSQL</p>
+            <p><a href="#" style="color:var(--muted)">Ver demo →</a></p>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="about" style="margin-top:36px">
+        <h2>Sobre mí</h2>
+        <p>Un párrafo corto con tu background, intereses y en qué tipo de trabajos estás buscando.</p>
+      </section>
+
+      <section id="contact" style="margin-top:28px">
+        <h2>Contacto</h2>
+        <p>Email: <a href="mailto:tu@email.com" style="color:var(--muted)">tu@email.com</a></p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Tu Nombre · <a href="https://github.com/tuusuario" style="color:var(--muted)">GitHub</a>
+    </footer>
   </div>
 
+  <script>
+    // Añade año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
