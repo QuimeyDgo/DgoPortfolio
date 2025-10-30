@@ -17,9 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: public
     steps:
       - uses: actions/checkout@v4
 
@@ -29,18 +26,28 @@ jobs:
           cache: 'npm'
           cache-dependency-path: public/package-lock.json
 
+      # Ejecuta npm dentro de public sin cambiar working-directory
       - run: npm ci
-      - run: npm run build
+        working-directory: public
 
+      - run: npm run build
+        working-directory: public
+
+      # Verifica que exista build/index.html
       - name: Inspect build output
         run: |
-          pwd
-          ls -la
-          echo "---- build ----"
-          ls -la build
+          ls -la public
+          echo "---- public/build ----"
+          ls -la public/build
+          test -f public/build/index.html
+
+      # Fallback SPA (evita 404 de rutas)
+      - name: SPA fallback
+        run: cp public/build/index.html public/build/404.html
 
       - uses: actions/configure-pages@v5
 
+      # Sube exactamente public/build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public/build
