@@ -27,7 +27,7 @@ export function Contact({ language }: ContactProps) {
 
   const socialLinks = [
     { icon: <Github className="w-6 h-6" />, label: "GitHub", href: "https://github.com/QuimeyDgo" },
-    { icon: <Linkedin className="w-6 h-6" />, label: "LinkedIn", href: "https://www.linkedin.com/in/quimey-dagostino-755303283/" },
+    { icon: <Linkedin className="w-6 h-6" />, label: "LinkedIn", href: "www.linkedin.com/in/quimey-dagos" },
   
   ];
 
