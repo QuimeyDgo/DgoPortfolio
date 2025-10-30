@@ -14,12 +14,12 @@ export function Skills({ language }: SkillsProps) {
     {
       category: t.skills.categories.languages,
       icon: <Code2 className="w-6 h-6" />,
-      skills: ["C", "JavaScript", "TypeScript"],
+      skills: ["C", "Java", "JavaScript", "TypeScript"],
     },
     {
       category: t.skills.categories.frontend,
       icon: <Code2 className="w-6 h-6" />,
-      skills: ["Angular"],
+      skills: ["Angular", "HTML", "CSS"],
     },
     {
       category: t.skills.categories.backend,
@@ -29,7 +29,7 @@ export function Skills({ language }: SkillsProps) {
     {
       category: t.skills.categories.tools,
       icon: <Wrench className="w-6 h-6" />,
-      skills: ["Git", "GitHub", "VS Code", "IntelliJ","Docker", "Cursor", "N8N"],
+      skills: ["Git", "GitHub", "VS Code", "IntelliJ","Docker", "Cursor", "N8N", "Mysql Workbench"],
     },
    
   ];

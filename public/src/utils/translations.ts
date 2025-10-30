@@ -18,7 +18,7 @@ export const translations = {
     about: {
       title: "Sobre Mí",
       paragraph1:
-      "Hola, me llamo Quimey Dagostino y soy un desarrollador de software recién graduado en diciembre de 2024, con una gran motivación por seguir aprendiendo y creciendo dentro del mundo de la tecnología. Aunque mi experiencia profesional es reciente, ya comencé mi camino como freelance, lo que me permitió enfrentar desafíos reales, trabajar con clientes y aplicar mis conocimientos en proyectos concretos.",
+      "Hola, me llamo Quimey Dagostino y soy un desarrollador de software  graduado en diciembre de 2024 (UTN Mar del Plata), con una gran motivación por seguir aprendiendo y creciendo dentro del mundo de la tecnología. Aunque mi experiencia profesional es reciente, ya comencé mi camino como freelance, lo que me permitió enfrentar desafíos reales, trabajar con clientes y aplicar mis conocimientos en proyectos concretos.",
       paragraph2:
 
         " Actualmente, me desempeño como ayudante de cátedra en la UTN, lo que me brinda la oportunidad de profundizar mis saberes técnicos y, al mismo tiempo, compartirlos con otros. Esta experiencia me ha insentivado a parcticar la comunicación clara y la mejora continua.",
