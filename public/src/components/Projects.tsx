@@ -64,11 +64,12 @@ export function Projects({ language }: ProjectsProps) {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group relative bg-[#0a0e1a] rounded-2xl overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300"
             >
-              <div className="relative overflow-hidden aspect-video">
+                           <div className="relative overflow-hidden aspect-video bg-[#0a0e1a]">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-contain object-center transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a] via-transparent to-transparent opacity-60" />
                 
