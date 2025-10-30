@@ -143,7 +143,7 @@ Al ser una aplicación de uso personal y sin conexión a servidores externos, Co
             onClick={handleModalBackdrop}
             style={{animation: 'fadeinmodal .2s'}}
           >
-            <div className="relative max-w-xl w-[92vw] sm:w-[70vw] md:w-[540px] mx-4 p-7 sm:p-10 rounded-3xl border-2 border-cyan-400/30 bg-[#232834ec] shadow-2xl flex flex-col items-center"
+            <div className="relative max-w-xl w-[92vw] sm:w-[70vw] md:w-[540px] mx-4 p-7 sm:p-10 rounded-3xl border-2 border-cyan-400/30 bg-[#232834] shadow-2xl flex flex-col items-center"
               role="dialog"
               aria-modal="true"
               onClick={e => e.stopPropagation()}>
