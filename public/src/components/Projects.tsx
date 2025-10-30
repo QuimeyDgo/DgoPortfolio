@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { ExternalLink, Github } from "lucide-react";
 import { translations, Language } from "../utils/translations";
 
+
 interface ProjectsProps {
   language: Language;
 }
@@ -10,32 +11,34 @@ interface ProjectsProps {
 export function Projects({ language }: ProjectsProps) {
   const t = translations[language];
 
-  const projects = [
-    {
-      title: t.projects.items[0].title,
-      description: t.projects.items[0].description,
-      image: "/src/assets/projects/OrganizerSync.png",
-      tags: ["Java, JavaFX, json-server, MediaPlayer"],
-      liveUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      title: t.projects.items[1].title,
-      description: t.projects.items[1].description,
-      image: "/src/assets/projects/logopage.png",
-      tags: ["Angular,TS ,json-server ,Bootstrap, html,CSS"],
-      liveUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      title: t.projects.items[2].title,
-      description: t.projects.items[2].description,
-      image: "/src/assets/projects/logo.ico",
-      tags: ["Angular ,TS,json-server,Bootstrap,html,CSS, Electron"],
-      liveUrl: "#",
-      githubUrl: "#",
-    },
-  ];
+ 
+// dentro de projects, reemplaza image: "...":
+const projects = [
+  {
+    title: t.projects.items[0].title,
+    description: t.projects.items[0].description,
+     image: new URL("../assets/OrganizerSyncLogo.png", import.meta.url).href,
+    tags: ["Java, JavaFX, json-server, MediaPlayer"],
+    liveUrl: "#",
+    githubUrl: "#",
+  },
+  {
+    title: t.projects.items[1].title,
+    description: t.projects.items[1].description,
+    image: new URL("../assets/logopage.png", import.meta.url).href,
+    tags: ["Angular, TS, json-server, Bootstrap, html, CSS"],
+    liveUrl: "#",
+    githubUrl: "#",
+  },
+  {
+    title: t.projects.items[2].title,
+    description: t.projects.items[2].description,
+    image: new URL("../assets/logo.ico", import.meta.url).href,
+    tags: ["Angular, TS, json-server, Bootstrap, html, CSS, Electron"],
+    liveUrl: "#",
+    githubUrl: "#",
+  },
+];
 
   return (
     <section id="projects" className="py-20 px-6 bg-[#131722]">
