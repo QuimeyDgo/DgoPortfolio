@@ -139,7 +139,7 @@ Al ser una aplicación de uso personal y sin conexión a servidores externos, Co
         {/* MODAL GLOBAL: fuera de la grilla para que cubra todo */}
         {expandedIndex !== null && (
           <div
-            className="fixed inset-0 z-50 bg-gray-900/95 flex justify-center items-center transition-all"
+            className="fixed inset-0 z-50 bg-gray-900/80 backdrop-blur-sm flex justify-center items-center transition-all"
             onClick={handleModalBackdrop}
             style={{animation: 'fadeinmodal .2s'}}
           >
