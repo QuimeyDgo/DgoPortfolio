@@ -14,6 +14,11 @@ export function Projects({ language }: ProjectsProps) {
   // -- NUEVO: estado para controlar muestra del panel de detalle --
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
+  // -- Manejo cierre modal por click fondo --
+  function handleModalBackdrop(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (e.target === e.currentTarget) setExpandedIndex(null);
+  }
+
  
 // dentro de projects, reemplaza image: "...":
 const projects = [
@@ -111,33 +116,6 @@ Al ser una aplicación de uso personal y sin conexión a servidores externos, Co
                     <Github className="w-5 h-5 text-cyan-400" />
                   </a>
                 </div>
-
-                {/* Panel ampliado (modal flotante) */}
-                {expandedIndex === index && (
-                  <div className="absolute z-30 inset-0 flex items-center justify-center bg-[#131722e6] bg-opacity-90 backdrop-blur-md">
-                    <div className="relative max-w-lg w-full mx-4 p-8 rounded-2xl border border-cyan-500/30 bg-[#131722e0] shadow-2xl flex flex-col items-center">
-                      <button
-                        onClick={() => setExpandedIndex(null)}
-                        className="absolute top-2 right-2 text-gray-300 hover:text-cyan-400 text-2xl font-bold focus:outline-none"
-                        aria-label="Cerrar"
-                      >
-                        ×
-                      </button>
-                      <h4 className="text-2xl text-cyan-400 mb-2 font-bold">{project.title}</h4>
-                      {project.details.split('\n\n').map((parrafo, idx) => (
-                        <p key={idx} className="text-gray-300 mb-4">{parrafo}</p>
-                      ))}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.tags.map((tag) => (
-                          <span key={tag} className="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm border border-cyan-500/30">{tag}</span>
-                        ))}
-                      </div>
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="mt-2 px-6 py-2 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold transition-colors">
-                        Ver código fuente
-                      </a>
-                    </div>
-                  </div>
-                )}
               </div>
               <div className="p-6">
                 <h3 className="mb-2 text-cyan-400">{project.title}</h3>
@@ -157,6 +135,44 @@ Al ser una aplicación de uso personal y sin conexión a servidores externos, Co
             </motion.div>
           ))}
         </div>
+
+        {/* MODAL GLOBAL: fuera de la grilla para que cubra todo */}
+        {expandedIndex !== null && (
+          <div
+            className="fixed inset-0 z-50 bg-[#232834da] bg-opacity-95 backdrop-blur-xl flex justify-center items-center transition-all"
+            onClick={handleModalBackdrop}
+            style={{animation: 'fadeinmodal .2s'}}
+          >
+            <div className="relative max-w-xl w-[92vw] sm:w-[70vw] md:w-[540px] mx-4 p-7 sm:p-10 rounded-3xl border-2 border-cyan-400/30 bg-[#232834f4] shadow-2xl flex flex-col items-center"
+              role="dialog"
+              aria-modal="true"
+              onClick={e => e.stopPropagation()}>
+              <button
+                onClick={() => setExpandedIndex(null)}
+                className="absolute top-3 right-4 text-gray-300 hover:text-cyan-400 text-3xl font-bold focus:outline-none"
+                aria-label="Cerrar"
+                style={{lineHeight: 1}}
+              >
+                ×
+              </button>
+              <h4 className="text-2xl text-cyan-400 mb-4 font-bold w-full text-center">{projects[expandedIndex].title}</h4>
+              {projects[expandedIndex].details.split('\n\n').map((parrafo, idx) => (
+                <p key={idx} className="text-gray-100 mb-4 text-lg w-full text-center leading-relaxed">{parrafo}</p>
+              ))}
+              <div className="flex flex-wrap gap-2 mb-4 justify-center">
+                {projects[expandedIndex].tags.map((tag) => (
+                  <span key={tag} className="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm border border-cyan-500/30">{tag}</span>
+                ))}
+              </div>
+              <a href={projects[expandedIndex].githubUrl} target="_blank" rel="noopener noreferrer" className="mt-2 px-6 py-2 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold transition-colors">
+                Ver código fuente
+              </a>
+            </div>
+            <style>{`
+              @keyframes fadeinmodal {from { opacity: 0 } to { opacity: 1 }}
+            `}</style>
+          </div>
+        )}
       </div>
     </section>
   );
